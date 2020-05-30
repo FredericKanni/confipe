@@ -12,6 +12,7 @@ export const authenticationService = {
     connected,
     login,
     logout,
+
     currentUser: currentUserSubject.asObservable(),
     get currentUserValue() {
         return currentUserSubject.value;
@@ -25,9 +26,9 @@ function connected() {
 
 function login(user) {
     return fetch(
-        `/api/login`,
-        requestOptions.post(user)
-    )
+            `/api/login`,
+            requestOptions.post(user)
+        )
         .then(handleResponse)
         .then(({ data }) => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes

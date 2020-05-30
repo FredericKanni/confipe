@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProduitController extends Controller
 {
@@ -141,6 +142,22 @@ class ProduitController extends Controller
     /* withPivot, if exist detach else attach
         $pivot = Produits::wherePivotIn('id_fruit', '=', '1')->get();
         return ($pivot);*/
+
+
+    //retourner des product des producer 
+    public function getOfProducer(Request $request)
+    {  
+        $user = $request->user();
+    //  return $user;
+
+//remonte ts les produit qui appartienne au producteur qui a pou id_user notre id_user connecter
+        $products = Produits::with(['fruits'])->whereHas('producteur', function (Builder $query) use ($user) {
+            $query->where('id_user', '=', $user->id);
+        })->get();
+       // return $user;
+
+        return ProduitResource::collection($products);
+    }
 
 
 }

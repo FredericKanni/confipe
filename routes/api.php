@@ -26,10 +26,31 @@ Route::get('/logout','AuthController@logout')->middleware('auth:api');
 /*LOGIN/LOGOUT*/
 
 // Sécurisation de la route
-Route::middleware(['auth:api','roles:Admin|Producteur'])->prefix('produits')->group(function () {
-    Route::post('/', 'ProduitController@createOrUpdate'); 
+// Route::middleware(['auth:api','role:Admin|Producteur'])->prefix('produits')->group(function () {
+ 
+//     Route::get('/', 'ProduitController@index'); 
+//    Route::post('/', 'ProduitController@createOrUpdate'); 
+// }); 
+
+// Sécurisation de la route
+// Route::middleware(['auth:api','role:Admin|Producteur'])->prefix('producteur')->group(function () {
+ 
+//     Route::get('/produits', 'ProduitController@index'); 
+//    Route::post('/', 'ProduitController@createOrUpdate'); 
+// }); 
+
+Route::middleware(['auth:api','role:Producteur'])->prefix('producteur')->group(function () {
+ 
+    Route::get('/produits', 'ProduitController@getOfProducer'); 
+   Route::post('/', 'ProduitController@createOrUpdate'); 
 }); 
 
+
+// Route::middleware(['auth:api','role:Producteur'])->prefix('producteur')->group(function () {
+ 
+//         Route::get('/produits', 'ProduitController@getOfProducer'); 
+//        Route::post('/', 'ProduitController@createOrUpdate'); 
+//     }); 
 
 Route::get('fruits', 'FruitsController@index');
 

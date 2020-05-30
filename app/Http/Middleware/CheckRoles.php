@@ -20,7 +20,9 @@ class CheckRoles
         $user = $request->user();
         $role = Role::find($user->id_role);
         $roles = explode("|",$roles);
-        
+        //return response()->json(['error'=>[$role]],403);
+       
+       
         if (!in_array($role->name, $roles)) {
             return response()->json(['error'=>'Unauthorized'],403);
 

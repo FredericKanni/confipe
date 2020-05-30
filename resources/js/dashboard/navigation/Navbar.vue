@@ -65,6 +65,23 @@
           </v-list-item-content>
          </v-list-item>
 
+
+
+<v-divider></v-divider>
+
+         <v-list-item link>
+          <v-list-item-icon>
+            <v-icon>mdi-shopping</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="font-weight-bold">
+              <router-link :to="{name:'dashboardproducteur'}">Producteur</router-link>
+            </v-list-item-title>
+          </v-list-item-content>
+         </v-list-item>
+         
+
       </v-list>
     </v-navigation-drawer>
 <!-- Navigation vertical -->

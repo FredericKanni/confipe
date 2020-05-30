@@ -1,10 +1,10 @@
 import Axios from "axios"
-import {apiServices} from '../../_services/api.services'
+import { apiServices } from '../../_services/api.services'
 export default {
 
     props: {
         product: {
-            default: function () {
+            default: function() {
                 return {
 
                 }
@@ -35,9 +35,9 @@ export default {
         }
     },
     watch: {
-        search: function (val) {
+        search: function(val) {
             if (val && val.length > 2) {
-                apiServices.get('/api/fruits',  { query: val } )
+                apiServices.get('/api/fruits', { query: val })
                     .then(({ data }) => {
                         this.loading = false
 
@@ -49,12 +49,14 @@ export default {
         },
     },
 
-    
+
     methods: {
 
         addDatas() {
-           //console.log(this.produit)
-            apiServices.post('/api/produits/', {
+            //console.log(this.produit)
+            apiServices.post('/api/producteur/produits', {
+
+                //   apiServices.post('/api/produits/', {
                 name: this.produit,
                 id_producteur: this.id_producteur,
                 price: this.price,
@@ -62,24 +64,23 @@ export default {
                 fruits: this.fruits,
                 photo: this.photo,
                 id: this.id,
-            
+
 
             }).then(response => {
-                 
-                    console.log("Données enregistrée")
-                    this.$emit('addProduit', response.data)
-                    this.dialog = false;
-                    this.dialog = false
-                    this.snackbar = true
-                    this.text = 'le produit à bien été ajoutée'
-            
-                })
-            
-             
 
-            
-                .catch(
-                )  
+                console.log("Données enregistrée")
+                this.$emit('addProduit', response.data)
+                this.dialog = false;
+                this.dialog = false
+                this.snackbar = true
+                this.text = 'le produit à bien été ajoutée'
+
+            })
+
+
+
+
+            .catch()
         },
 
         modifierProduit(product) {
@@ -95,7 +96,7 @@ export default {
             _.merge(this.fruits, this.fruitList) // sert à fusionner
 
         },
-        
+
         onFileChange(file) {
             let reader = new FileReader;
 
@@ -112,13 +113,12 @@ export default {
 
         //Todo à modifier getProducteur (la route c'est plus api/producteur)
         getProducteur() {
-            apiServices.get("/api/produits").then(({ data }) => {
+            apiServices.get("/api/producteur/produits").then(({ data }) => {
                 data.data.forEach(_produit => {
                     this.producteurs.push(_produit.producteur)
-                    
+
                 })
-            }
-            );
+            });
         },
 
     },

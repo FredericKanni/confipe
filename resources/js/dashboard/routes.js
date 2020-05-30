@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import Dashboard from './views/Dashboard.vue';
 import Card from "./views/Card.vue";
 import Login from "./login/Login.vue";
+import DashboardProducteur from "./views/DashboardProducteur.vue";
 import { Role } from './_helpers/role';
 import { authenticationService } from '../dashboard/_services/authentication.service'
 
@@ -22,12 +23,22 @@ const router = new VueRouter({
             component: Card,
         },
 
-         {
+        {
             path: '/login',
             name: 'login',
             component: Login,
-       
-        }, 
+
+        },
+
+        {
+            path: '/dashboardproducteur',
+            name: 'dashboardproducteur',
+            component: DashboardProducteur,
+            meta: { authorize: [Role.Producteur] }
+
+        },
+
+
 
         {
             path: '/dashboard',
@@ -68,6 +79,3 @@ router.beforeEach((to, from, next) => {
 
 
 export default router;
-
-
-

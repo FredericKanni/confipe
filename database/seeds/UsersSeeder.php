@@ -22,6 +22,16 @@ class UsersSeeder extends Seeder
                 "password" => bcrypt('admin'),
                 "id_role" => "1"
 
+            ],
+
+            [
+                "id" => 2,
+                "name" => "KANNI",
+                //"firstname" => "Krishna",
+                "email" => "kanni@ymail.com",
+                "password" => bcrypt('admin'),
+                "id_role" => "3"
+
             ]
         ];
 
